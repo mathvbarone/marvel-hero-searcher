@@ -1,1 +1,8 @@
-<input type="text">
+<div class="row">
+  <div class="col search-container">
+    <input #search id="search" type="text" class="form-control" placeholder="Search for an Marvel Hero">
+    <div class="searching-icon">
+      <i *ngIf="searching" class="fas fa-spin fa-circle-notch text-primary" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>

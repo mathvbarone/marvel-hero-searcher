@@ -43,7 +43,7 @@ export class MarvelService {
     const timeStamp = this.getTimeStamp();
     const hash = this.getHash(timeStamp);
     // tslint:disable-next-line:max-line-length
-    const requestUrl = `${this._marvelCharacterUrl}?nameStartsWith=${nameStarts}&orderBy=name&limit=${limit}&ts=${timeStamp}&apikey=${this._publicKey}&hash=${hash}`;
+    const requestUrl = `${this._marvelCharacterUrl}?nameStartsWith=${nameStarts}&orderBy=-modified&limit=${limit}&ts=${timeStamp}&apikey=${this._publicKey}&hash=${hash}`;
 
     return this.http.get<Marvel>(requestUrl)
       .pipe(map(res => res.data.results.map(this.parseHeroes)));

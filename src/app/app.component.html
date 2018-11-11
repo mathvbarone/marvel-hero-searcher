@@ -1,19 +1,18 @@
-<section class="container">
-  <div class="row">
-    <div class="container px-5">
-      <div class="row">
-        <div class="col search-container">
-          <input #search id="search" type="text" class="form-control" (input)="checkInputValue($event)" placeholder="Search for an artist"
-            [ngbTypeahead]="onSearch" [resultTemplate]="resultTemplate" [resultFormatter]="resultFormatter">
-        </div>
-      </div>
-
-      <div>
-        <div *ngIf="searching" class="searching-icon">Searching...</div>
-      </div>
-      <div *ngIf="results.length > 1">
-        <app-heroes-list [results]="results"></app-heroes-list>
+<section class="search-section">
+  <div class="container">
+    <div class="row">
+      <div class="col search-container">
+        <input #search id="search" type="text" class="form-control" [(ngModel)]="searchValue" (ngModelChange)="checkInputValue()"
+          placeholder="Search for an artist" [ngbTypeahead]="onSearch" [resultTemplate]="resultTemplate"
+          [resultFormatter]="resultFormatter">
       </div>
     </div>
+  </div>
+</section>
+
+<section class="result-section">
+  <div *ngIf="searching" class="searching-icon">Searching...</div>
+  <div *ngIf="results.length > 1">
+    <app-heroes-list [results]="results"></app-heroes-list>
   </div>
 </section>

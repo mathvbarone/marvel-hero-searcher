@@ -2,6 +2,21 @@
 <html lang="en">
 
 <head>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+    .loading-wrapper {
+      width:100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
   <meta charset="utf-8">
   <title>CieloProject</title>
   <base href="/">
@@ -10,7 +25,16 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
+
+
 <body>
+
+  <div class="loading-wrapper">
+    <figure>
+      <img src="assets/images/loading.gif" alt="">
+    </figure>
+  </div>
+
   <app-root></app-root>
 </body>
 

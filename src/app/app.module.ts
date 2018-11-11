@@ -8,6 +8,7 @@ import { HeroesListComponent } from './heroes-list/heroes-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { ErrorModalComponent } from './shared/components/error-modal/error-modal.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     AppComponent,
     HeroesListComponent,
     HeroDetailComponent,
-    ModalComponent
+    ModalComponent,
+    ErrorModalComponent,
   ],
   imports: [
     FormsModule,
@@ -26,7 +28,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
   providers: [],
   bootstrap: [
     AppComponent,
-    ModalComponent
+    ModalComponent,
+    ErrorModalComponent
   ]
 })
 export class AppModule { }

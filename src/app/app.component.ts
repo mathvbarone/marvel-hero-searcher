@@ -1,45 +1,68 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MarvelService } from './shared/services/marvel-service.service';
-import { Marvel } from './models/marvel';
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, mergeMap, tap, distinctUntilChanged } from 'rxjs/operators';
 import { Results } from './models/results';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorModalComponent } from './shared/components/error-modal/error-modal.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   @ViewChild('search')
   public search: ElementRef;
+  public searchValue = '';
   public searching = false;
   public results: Results
   private unsubscribe$ = new Subject();
 
-  constructor(private marvelService: MarvelService) {
+  constructor(private marvelService: MarvelService,
+    private modalService: NgbModal) {
     this.onSearch = this.onSearch.bind(this);
     this.results = new Results();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.search.nativeElement.focus();
+  }
+
+
+  public emptyResults() {
+    this.searching = false;
+    this.results = new Results();
   }
 
   public onSearch(search$: Observable<string>) {
     return search$.pipe(
       debounceTime(400),
       distinctUntilChanged(),
-      tap(() => (this.searching = true)),
-      mergeMap(term => (term.length > 2 ? this.marvelService.getCharacters(10, term) : [])),
-      tap(() => (this.searching = false))
+      mergeMap(term => {
+        if (term.length < 2) {
+          this.searching = false
+          return [];
+        } else {
+          this.searching = true
+          return this.marvelService.getCharacters(10, term);
+        }
+      })
     )
-      .subscribe(term => this.results = term);
+      .subscribe(term => {
+        this.searching = false;
+        this.results = term;
+      },
+        error => this.openErrorModal());
   }
 
-  private checkInputValue(event: any) {
-    let target = event.target.value;
-    if (!target || target.length < 2) {
-      this.results = new Results();
+  openErrorModal() {
+    this.modalService.open(ErrorModalComponent).componentInstance;
+  }
+
+  private checkInputValue() {
+    if (!this.searchValue || this.searchValue.length < 2) {
+      this.emptyResults();
     }
   }
 

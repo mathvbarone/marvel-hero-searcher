@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Marvel } from '../models/marvel';
-import { MarvelService } from '../marvel-service.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Results } from '../shared/models/results';
 
 @Component({
   selector: 'app-heroes-list',
@@ -9,13 +8,10 @@ import { MarvelService } from '../marvel-service.service';
 })
 export class HeroesListComponent implements OnInit {
 
-  constructor(private marvelService: MarvelService) { }
+  @Input() results: Results;
 
-  ngOnInit() {
-    this.marvelService.getCharacters(10, 'Spider-Man')
-      .subscribe((res: Marvel) => {
-        console.log(res.data);
-      });
-  }
+  constructor() { }
+
+  ngOnInit() { }
 
 }

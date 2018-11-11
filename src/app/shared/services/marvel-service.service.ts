@@ -4,7 +4,8 @@ import { map } from 'rxjs/operators';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { Observable } from 'rxjs';
-import { Marvel } from './models/marvel';
+import { Marvel } from '../models/marvel';
+import { Results } from '../models/results';
 
 
 @Injectable({
@@ -36,16 +37,30 @@ export class MarvelService {
 
 
   getCharacters(
-    limit: number = 10,
+    limit = 10,
     nameStarts: string
-    ): Observable<Marvel> {
+  ) {
     const timeStamp = this.getTimeStamp();
     const hash = this.getHash(timeStamp);
     // tslint:disable-next-line:max-line-length
     const requestUrl = `${this._marvelCharacterUrl}?nameStartsWith=${nameStarts}&orderBy=name&limit=${limit}&ts=${timeStamp}&apikey=${this._publicKey}&hash=${hash}`;
 
     return this.http.get<Marvel>(requestUrl)
-      .pipe(map((res: any) => res));
+      .pipe(map(res => res.data.results.map(this.parseHeroes)));
+  }
+
+
+
+  parseHeroes(info: any) {
+    const results: Partial<Results> = {};
+
+    results.name = info.name;
+    results.description = info.description;
+    results.thumbnail = info.thumbnail;
+    results.urls = info.urls;
+
+    return results as Results;
+
   }
 
 }

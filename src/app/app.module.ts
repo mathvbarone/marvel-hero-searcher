@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeroesListComponent } from './heroes-list/heroes-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HeroesListComponent,
     HeroDetailComponent,
+    ModalComponent
   ],
   imports: [
     FormsModule,
@@ -22,6 +24,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+    ModalComponent
+  ]
 })
 export class AppModule { }

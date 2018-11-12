@@ -13,7 +13,14 @@
 
 <section class="result-section">
   <img *ngIf="searching" class="searching-icon" src="assets/images/loading-icon.png" alt="Loading Icon">
-  <div *ngIf="results.length > 0">
+  <div class="container">
+    <div class="row">
+      <ngb-alert *ngIf="serviceError" (click)="closeAlert()" class="col alert-message">
+        <strong>Something went wrong! :(</strong> Please try again later.
+      </ngb-alert>
+    </div>
+  </div>
+  <div @slideUp *ngIf="results.length > 0">
     <app-heroes-list [results]="results"></app-heroes-list>
   </div>
 </section>

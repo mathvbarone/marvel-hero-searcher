@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "postinstall": "npm run build"
   },
-  "postinstall": "ng build --aot --prod",
+  "postinstall": "ng build --prod",
   "engines": {
     "node": "10.9.0",
     "npm": "6.4.0"

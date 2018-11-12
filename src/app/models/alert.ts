@@ -1,0 +1,3 @@
+interface Alert {
+  type: string;
+}

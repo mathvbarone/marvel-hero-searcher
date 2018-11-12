@@ -1,28 +1,34 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { MarvelService } from './shared/services/marvel-service.service';
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, mergeMap, tap, distinctUntilChanged } from 'rxjs/operators';
 import { Results } from './models/results';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ErrorModalComponent } from './shared/components/error-modal/error-modal.component';
+import { NgbModal, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [NgbAlertConfig],
 })
+
 export class AppComponent implements OnInit {
+
   @ViewChild('search')
   public search: ElementRef;
   public searchValue = '';
   public searching = false;
+  public serviceError = false;
   public results: Results
   private unsubscribe$ = new Subject();
 
   constructor(private marvelService: MarvelService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    alertConfig: NgbAlertConfig) {
     this.onSearch = this.onSearch.bind(this);
     this.results = new Results();
+    alertConfig.type = 'danger';
   }
 
   public ngOnInit() {
@@ -31,6 +37,7 @@ export class AppComponent implements OnInit {
 
 
   public emptyResults() {
+    this.serviceError = false;
     this.searching = false;
     this.results = new Results();
   }
@@ -45,7 +52,7 @@ export class AppComponent implements OnInit {
           return [];
         } else {
           this.searching = true
-          return this.marvelService.getCharacters(30, term);
+          return this.marvelService.getCharacters(10, term);
         }
       })
     )
@@ -53,12 +60,12 @@ export class AppComponent implements OnInit {
         this.searching = false;
         this.results = term;
       },
-        error => this.openErrorModal());
+        error => {
+          this.searching = false;
+          this.serviceError = true;
+        });
   }
 
-  openErrorModal() {
-    this.modalService.open(ErrorModalComponent).componentInstance;
-  }
 
   private checkInputValue() {
     if (!this.searchValue || this.searchValue.length < 2) {
@@ -70,5 +77,11 @@ export class AppComponent implements OnInit {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
+  private closeAlert() {
+    this.serviceError = false;
+  }
+
+
 
 }

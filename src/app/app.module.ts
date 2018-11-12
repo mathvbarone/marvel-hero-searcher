@@ -8,7 +8,6 @@ import { HeroesListComponent } from './heroes-list/heroes-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './shared/components/modal/modal.component';
-import { ErrorModalComponent } from './shared/components/error-modal/error-modal.component';
 import { HeaderComponent } from './header/header.component';
 import { MarvelLogoComponent } from './shared/components/marvel-logo/marvel-logo.component';
 
@@ -19,7 +18,6 @@ import { MarvelLogoComponent } from './shared/components/marvel-logo/marvel-logo
     HeroesListComponent,
     HeroDetailComponent,
     ModalComponent,
-    ErrorModalComponent,
     HeaderComponent,
     MarvelLogoComponent,
   ],
@@ -32,8 +30,7 @@ import { MarvelLogoComponent } from './shared/components/marvel-logo/marvel-logo
   providers: [],
   bootstrap: [
     AppComponent,
-    ModalComponent,
-    ErrorModalComponent
+    ModalComponent
   ]
 })
 export class AppModule { }

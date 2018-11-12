@@ -1,19 +1,54 @@
+
+
+@import '../../variables.scss';
+
 .hero-box{
   width: 100%;
   height: 100%;
   background-size: cover;
+  position: relative;
   background-position: center;
   cursor: pointer;
-  transition: linear 0.2s all;
+  transition: ease-in-out 0.2s all;
   &:hover {
-    transform: scale(1.1);
+    .hero-name {
+      transform: translateY(100%);
+    }
+    .hero-name-hover {
+      transform: translateY(0);
+    }
   }
 }
 
 
-.hero-box-name{
-  color: #fff;
-  display: block;
-  width: 100%;
-  height: 100%;
+.hero-name{
+    color: #fff;
+    display: block;
+    position: absolute;
+    font-size: 20px;
+    bottom: 0;
+    right: 0;
+    display: inline-block;
+    background: $red-color;
+    margin: 0;
+    padding: 10px 20px;
+    transition: ease-in-out 0.2s all;
+}
+
+.hero-name-hover {
+    width: 100%;
+    opacity: 0.9;
+    height: 100%;
+    display: flex;
+    background: $red-color;
+    position: relative;
+    padding: 0 40px;
+    color: #fff;
+    font-size: 54px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: ease-in-out 0.2s all;
+    transform: translateY(100%);
 }

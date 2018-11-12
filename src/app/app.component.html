@@ -12,8 +12,14 @@
 </section>
 
 <section class="result-section">
-  <div *ngIf="searching" class="searching-icon">Searching...</div>
-  <div *ngIf="results.length > 1">
+  <img *ngIf="searching" class="searching-icon" src="assets/images/loading-icon.png" alt="Loading Icon">
+  <div *ngIf="results.length > 0">
     <app-heroes-list [results]="results"></app-heroes-list>
   </div>
 </section>
+
+
+<footer class="footer" [style.position]="results.length > 0 ? 'initial' : 'fixed'">
+  <strong>Made by <a target="_blank" rel="noopener" class="footer-link" href="https://www.matheusbarone.com/en/" title="Matheus Barone">Matheus
+      Barone</a></strong>
+</footer>

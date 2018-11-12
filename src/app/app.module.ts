@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { ErrorModalComponent } from './shared/components/error-modal/error-modal.component';
 import { HeaderComponent } from './header/header.component';
+import { MarvelLogoComponent } from './shared/components/marvel-logo/marvel-logo.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
     ModalComponent,
     ErrorModalComponent,
     HeaderComponent,
+    MarvelLogoComponent,
   ],
   imports: [
     FormsModule,

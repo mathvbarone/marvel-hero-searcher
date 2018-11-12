@@ -1,6 +1,5 @@
 .heroes-list {
-  margin-right: 0;
-  margin-left: 0;
+    margin: 0 0 20px 0;
 }
 
 .heroes-list-item {
@@ -8,10 +7,19 @@
   overflow: hidden;
   height: 400px;
   padding: 0;
+  transition: ease-in-out 0.2s all;
+  &:hover {
+    transform: scale(1.1);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 11px 10px #00000052;
+  }
 }
 
-.heroes-list-component {
+
+.hero-detail-component{
   width: 100%;
-  height:100%;
-  background-position: center;
+  height: 100%;
 }
+
+

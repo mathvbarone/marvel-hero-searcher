@@ -1,6 +1,6 @@
-# Marvel Heroes Searcher
+# Marvel Hero Searcher
 
-A Heroes Searcher using the API provided by Marvel.
+A Hero Searcher using the API provided by Marvel.
 
 ## Development server
 

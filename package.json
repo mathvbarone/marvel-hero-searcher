@@ -29,7 +29,8 @@
     "core-js": "~2.5.4",
     "path": "^0.12.7",
     "rxjs": "~6.3.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "express": "^4.16.4",
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.8.7",

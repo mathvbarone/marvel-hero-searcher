@@ -19,7 +19,7 @@
       </ngb-alert>
     </div>
   </div>
-  <div @slideUp *ngIf="results.length > 0">
+  <div *ngIf="results">
     <app-heroes-list [results]="results"></app-heroes-list>
   </div>
 </section>

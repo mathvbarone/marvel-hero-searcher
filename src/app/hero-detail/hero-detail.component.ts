@@ -18,11 +18,11 @@ export class HeroDetailComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
 
-  ngOnInit() {
+  public ngOnInit() {
     this.thumb = `${this.result.thumbnail.path}.${this.result.thumbnail.extension}`
   }
 
-  notFound(element: string, elementName: string) {
+  private notFound(element: string, elementName: string) {
     if (!element) {
       return element = `${elementName} not found`;
     } else {
@@ -30,7 +30,7 @@ export class HeroDetailComponent implements OnInit {
     }
   }
 
-  open() {
+  public open() {
 
     console.log(this.result.name);
     console.log(this.result.description);

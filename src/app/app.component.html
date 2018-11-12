@@ -4,8 +4,7 @@
     <div class="row">
       <div class="col search-container">
         <input #search id="search" type="text" class="form-control" [(ngModel)]="searchValue" (ngModelChange)="checkInputValue()"
-          placeholder="Search for a Marvel Hero" [ngbTypeahead]="onSearch" [resultTemplate]="resultTemplate"
-          [resultFormatter]="resultFormatter">
+          placeholder="Search for a Marvel Hero. Ex: Spider-Man" [ngbTypeahead]="onSearch">
       </div>
     </div>
   </div>
@@ -26,7 +25,7 @@
 </section>
 
 
-<footer class="footer" [style.position]="results.length > 0 ? 'initial' : 'fixed'">
+<footer class="footer">
   <strong>Made by <a target="_blank" rel="noopener" class="footer-link" href="https://www.matheusbarone.com/en/" title="Matheus Barone">Matheus
       Barone</a></strong>
 </footer>

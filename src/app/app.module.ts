@@ -9,6 +9,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { ErrorModalComponent } from './shared/components/error-modal/error-modal.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ErrorModalComponent } from './shared/components/error-modal/error-modal
     HeroDetailComponent,
     ModalComponent,
     ErrorModalComponent,
+    HeaderComponent,
   ],
   imports: [
     FormsModule,

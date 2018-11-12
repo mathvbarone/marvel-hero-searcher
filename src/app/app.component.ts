@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
           return [];
         } else {
           this.searching = true
-          return this.marvelService.getCharacters(10, term);
+          return this.marvelService.getCharacters(4, term);
         }
       })
     )

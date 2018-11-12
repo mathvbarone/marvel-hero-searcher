@@ -1,5 +1,5 @@
-<ul>
-  <li class="col-3" *ngFor="let result of results">
-    <app-hero-detail [result]="result"></app-hero-detail>
+<ul class="row heroes-list">
+  <li class="col-sm-3 heroes-list-item" *ngFor="let result of results">
+    <app-hero-detail class="heroes-list-component" [result]="result"></app-hero-detail>
   </li>
 </ul>

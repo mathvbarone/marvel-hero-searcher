@@ -1,0 +1,17 @@
+.heroes-list {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.heroes-list-item {
+  display: flex;
+  overflow: hidden;
+  height: 400px;
+  padding: 0;
+}
+
+.heroes-list-component {
+  width: 100%;
+  height:100%;
+  background-position: center;
+}

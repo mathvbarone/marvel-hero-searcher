@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Play:400,700');
 @import '~bootstrap/scss/bootstrap.scss';
 
 * {
@@ -9,11 +9,16 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Play', sans-serif;
+  background: #22262a;
+}
+
 .loading-wrapper{
   display: none;
 }
 
 figure,
 img {
-  max-width: 100%;
+  width: 100%;
 }

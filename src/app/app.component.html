@@ -1,9 +1,10 @@
+<app-header></app-header>
 <section class="search-section">
   <div class="container">
     <div class="row">
       <div class="col search-container">
         <input #search id="search" type="text" class="form-control" [(ngModel)]="searchValue" (ngModelChange)="checkInputValue()"
-          placeholder="Search for an artist" [ngbTypeahead]="onSearch" [resultTemplate]="resultTemplate"
+          placeholder="Search for a Marvel Hero" [ngbTypeahead]="onSearch" [resultTemplate]="resultTemplate"
           [resultFormatter]="resultFormatter">
       </div>
     </div>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cielo-project": {
+    "marvel-hero-searcher": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cielo-project",
+            "outputPath": "dist/marvel-hero-searcher",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cielo-project:build"
+            "browserTarget": "marvel-hero-searcher:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cielo-project:build:production"
+              "browserTarget": "marvel-hero-searcher:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cielo-project:build"
+            "browserTarget": "marvel-hero-searcher:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "cielo-project-e2e": {
+    "marvel-hero-searcher-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cielo-project:serve"
+            "devServerTarget": "marvel-hero-searcher:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cielo-project:serve:production"
+              "devServerTarget": "marvel-hero-searcher:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "cielo-project"
+  "defaultProject": "marvel-hero-searcher"
 }

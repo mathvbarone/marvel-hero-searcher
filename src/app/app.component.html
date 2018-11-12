@@ -1,29 +1,30 @@
-<app-header></app-header>
-<section class="search-section">
-  <div class="container">
-    <div class="row">
-      <div class="col search-container">
-        <input #search id="search" type="text" class="form-control" [(ngModel)]="searchValue" (ngModelChange)="checkInputValue()"
-          placeholder="Search for a Marvel Hero. Ex: Spider-Man" [ngbTypeahead]="onSearch">
+<div class="home-content">
+  <app-header></app-header>
+  <section class="search-section">
+    <div class="container">
+      <div class="row">
+        <div class="col search-container">
+          <input #search id="search" type="text" class="form-control" [(ngModel)]="searchValue" (ngModelChange)="checkInputValue()"
+            placeholder="Search for a Marvel Hero. Ex: Spider-Man" [ngbTypeahead]="onSearch">
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="result-section">
-  <img *ngIf="searching" class="searching-icon" src="assets/images/loading-icon.png" alt="Loading Icon">
-  <div class="container">
-    <div class="row">
-      <ngb-alert *ngIf="serviceError" (click)="closeAlert()" class="col alert-message">
-        <strong>Something went wrong! :(</strong> Please try again later.
-      </ngb-alert>
+  <section class="result-section">
+    <img *ngIf="searching" class="searching-icon" src="assets/images/loading-icon.png" alt="Loading Icon">
+    <div class="container">
+      <div class="row">
+        <ngb-alert *ngIf="serviceError" (click)="closeAlert()" class="col alert-message">
+          <strong>Something went wrong! :(</strong> Please try again later.
+        </ngb-alert>
+      </div>
     </div>
-  </div>
-  <div *ngIf="results">
-    <app-heroes-list [results]="results"></app-heroes-list>
-  </div>
-</section>
-
+    <div *ngIf="results.length > 0">
+      <app-heroes-list [results]="results"></app-heroes-list>
+    </div>
+  </section>
+</div>
 
 <footer class="footer">
   <strong>Made by <a target="_blank" rel="noopener" class="footer-link" href="https://www.matheusbarone.com/en/" title="Matheus Barone">Matheus

@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
           return [];
         } else {
           this.searching = true
-          return this.marvelService.getCharacters(12, term);
+          return this.marvelService.getCharacters(24, term);
         }
       })
     )

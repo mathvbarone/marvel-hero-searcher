@@ -2,6 +2,12 @@
 
 @import '../variables.scss';
 
+
+.home-content {
+  padding-top: 40px;
+  min-height: calc(100vh - 63px);
+}
+
 .search-section{
   padding: 30px 0 44px 0;
 }

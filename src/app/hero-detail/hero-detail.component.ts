@@ -24,7 +24,7 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 
   private notFound(element: string, elementName: string) {
     if (!element) {
-      return element = `${elementName} has no description registered.`;
+      return element = `We can't describe this character.`;
     } else {
       return element;
     }

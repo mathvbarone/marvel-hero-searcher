@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public search: ElementRef;
   public searchValue = '';
   public searching = false;
+  public noResults = false;
   public serviceError = false;
   public results: Results[];
   private unsubscribe$ = new Subject();
@@ -51,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.searching = false;
           return [];
         } else {
+          this.noResults = false;
           this.searching = true;
           return this.marvelService.getCharacters(24, term);
         }
@@ -60,6 +62,9 @@ export class AppComponent implements OnInit, OnDestroy {
         this.searching = false;
         this.results = term;
         console.log(this.results);
+        if (this.results.length === 0) {
+          this.noResults = true;
+        }
       },
         error => {
           this.searching = false;

@@ -24,7 +24,7 @@ export class HeroDetailComponent implements OnInit {
 
   private notFound(element: string, elementName: string) {
     if (!element) {
-      return element = `${elementName} not found`;
+      return element = `${elementName} not found.`;
     } else {
       return element;
     }
@@ -36,7 +36,7 @@ export class HeroDetailComponent implements OnInit {
     console.log(this.result.description);
     console.log(this.thumb);
 
-    const modalRef = this.modalService.open(ModalComponent).componentInstance;
+    const modalRef = this.modalService.open(ModalComponent, { centered: true }).componentInstance;
 
     modalRef.name = this.notFound(this.result.name, 'Name');
     modalRef.description = this.notFound(this.result.description, 'Description');

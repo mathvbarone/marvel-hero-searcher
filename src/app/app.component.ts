@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input, OnDestroy } from '@angular/core';
 import { MarvelService } from './shared/services/marvel-service.service';
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, mergeMap, tap, distinctUntilChanged } from 'rxjs/operators';
@@ -13,21 +13,21 @@ import { NgbModal, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbAlertConfig],
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('search')
   public search: ElementRef;
   public searchValue = '';
   public searching = false;
   public serviceError = false;
-  public results: Results
+  public results: Results[];
   private unsubscribe$ = new Subject();
 
   constructor(private marvelService: MarvelService,
     private modalService: NgbModal,
     alertConfig: NgbAlertConfig) {
     this.onSearch = this.onSearch.bind(this);
-    this.results = new Results();
+    this.results = new Array<Results>();
     alertConfig.type = 'danger';
   }
 
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   public emptyResults() {
     this.serviceError = false;
     this.searching = false;
-    this.results = new Results();
+    this.results = new Array<Results>();
   }
 
   public onSearch(search$: Observable<string>) {
@@ -48,10 +48,10 @@ export class AppComponent implements OnInit {
       distinctUntilChanged(),
       mergeMap(term => {
         if (term.length < 2) {
-          this.searching = false
+          this.searching = false;
           return [];
         } else {
-          this.searching = true
+          this.searching = true;
           return this.marvelService.getCharacters(24, term);
         }
       })
@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
       .subscribe(term => {
         this.searching = false;
         this.results = term;
+        console.log(this.results);
       },
         error => {
           this.searching = false;

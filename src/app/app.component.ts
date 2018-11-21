@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild, Input, OnDestroy } from '@ang
 import { MarvelService } from './shared/services/marvel-service.service';
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, mergeMap, tap, distinctUntilChanged } from 'rxjs/operators';
-import { Results } from './models/results';
 import { NgbModal, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Results } from './shared/models/results';
 
 
 @Component({
@@ -40,12 +40,13 @@ export class AppComponent implements OnInit, OnDestroy {
   public emptyResults() {
     this.serviceError = false;
     this.searching = false;
+    this.noResults = false;
     this.results = new Array<Results>();
   }
 
   public onSearch(search$: Observable<string>) {
     return search$.pipe(
-      debounceTime(400),
+      debounceTime(800),
       distinctUntilChanged(),
       mergeMap(term => {
         if (term.length < 2) {
@@ -61,7 +62,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(term => {
         this.searching = false;
         this.results = term;
-        console.log(this.results);
         if (this.results.length === 0) {
           this.noResults = true;
         }
@@ -84,8 +84,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  private closeAlert() {
+  public closeAlert() {
     this.serviceError = false;
+    this.noResults = false;
   }
 
 

@@ -13,8 +13,6 @@ import { Results } from '../models/results';
 })
 
 export class MarvelService {
-
-
   private _marvelCharacterUrl = 'https://gateway.marvel.com:443/v1/public/characters';
   private _publicKey = 'c4b5296bc35888971631d22848916410';
   private _privateKey = 'fddd97e16368b2fee706a1f6de69f30f191467d3';
@@ -36,20 +34,18 @@ export class MarvelService {
   }
 
 
-  getCharacters(
-    limit = 10,
-    nameStarts: string
-  ) {
+  getCharacters(limit = 10, nameStarts: string) {
     const timeStamp = this.getTimeStamp();
     const hash = this.getHash(timeStamp);
-    // tslint:disable-next-line:max-line-length
-    const requestUrl = `${this._marvelCharacterUrl}?nameStartsWith=${nameStarts}&orderBy=-modified&limit=${limit}&ts=${timeStamp}&apikey=${this._publicKey}&hash=${hash}`;
+    const nameStartsUrl = `?nameStartsWith=${nameStarts}`;
+    const limitUrl = `&limit=${limit}`;
+    const orderByUrl = `&orderBy=-modified`;
+    const hashUrl = `&ts=${timeStamp}&apikey=${this._publicKey}&hash=${hash}`;
+    const requestUrl = `${this._marvelCharacterUrl}${nameStartsUrl}${orderByUrl}${limitUrl}${hashUrl}`;
 
     return this.http.get<Marvel>(requestUrl)
       .pipe(map(res => res.data.results.map(this.parseHeroes)));
   }
-
-
 
   parseHeroes(info: any) {
     const results: Partial<Results> = {};

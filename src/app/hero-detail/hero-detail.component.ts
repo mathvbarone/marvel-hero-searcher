@@ -22,7 +22,7 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
     this.thumb = `${this.result.thumbnail.path}.${this.result.thumbnail.extension}`;
   }
 
-  private notFound(element: string, elementName: string) {
+  private checkElementReturn(element: string) {
     if (!element) {
       return element = `We can't describe this character.`;
     } else {
@@ -34,9 +34,9 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(ModalComponent, { centered: true }).componentInstance;
 
-    modalRef.name = this.notFound(this.result.name, 'Name');
-    modalRef.description = this.notFound(this.result.description, 'Description');
-    modalRef.thumb = this.notFound(this.thumb, 'Thumb');
+    modalRef.name = this.checkElementReturn(this.result.name);
+    modalRef.description = this.checkElementReturn(this.result.description);
+    modalRef.thumb = this.checkElementReturn(this.thumb);
   }
 
 

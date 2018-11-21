@@ -14,14 +14,12 @@
   <section class="result-section">
     <img *ngIf="searching" class="searching-icon" src="assets/images/loading-icon.png" alt="Loading Icon">
     <div class="container">
-      <div class="row" *ngIf="noResults">
-        <div class="col">
-          <p class="no-result">No hero was found. :(</p>
-        </div>
-        <ngb-alert *ngIf="serviceError" (click)="closeAlert()" class="col alert-message">
-          <strong>Something went wrong! :(</strong> Please try again later.
-        </ngb-alert>
-      </div>
+      <ngb-alert *ngIf="noResults" (click)="closeAlert()" class="col alert-message">
+        <strong>No hero was found. :(</strong>
+      </ngb-alert>
+      <ngb-alert *ngIf="serviceError" (click)="closeAlert()" class="col alert-message">
+        <strong>Something went wrong! :(</strong> Please try again later.
+      </ngb-alert>
     </div>
     <div *ngIf="results.length > 0">
       <app-heroes-list [results]="results"></app-heroes-list>

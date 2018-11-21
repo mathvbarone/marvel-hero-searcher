@@ -1,3 +1,0 @@
-interface Alert {
-  type: string;
-}

@@ -18,6 +18,12 @@
     z-index: 1;
     box-shadow: 0 0 11px 10px #00000052;
   }
+  @media (max-width: 768px) {
+    &:hover {
+      transform: scale(1);
+      box-shadow: none;
+    }
+  }
 }
 
 .hero-detail-component {

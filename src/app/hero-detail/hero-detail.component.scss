@@ -16,6 +16,14 @@
       transform: translateY(0);
     }
   }
+  @media (max-width: 768px) {
+    &:hover {
+      .hero-name,
+      .hero-name-hover {
+        transition: none;
+      }
+    }
+  }
 }
 
 .hero-name {
@@ -30,6 +38,10 @@
   margin: 0;
   padding: 10px 20px;
   transition: ease-in-out 0.2s all;
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .hero-name-hover {

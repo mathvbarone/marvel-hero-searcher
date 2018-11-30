@@ -1,6 +1,12 @@
 # Marvel Hero Searcher
 
-A Hero Searcher using the API provided by Marvel.
+A Hero Searcher using the API provided by Marvel made with Angular.
+
+## Technologies:
+- Angular
+- HTML
+- CSS (SCSS)
+- Typescript
 
 ## Demo:
 [www.marvel-searcher.herokuapp.com](https://marvel-searcher.herokuapp.com/)

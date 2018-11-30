@@ -3,21 +3,50 @@
   <section class="search-section">
     <div class="container">
       <div class="row">
-        <div class="col search-container">
-          <input #search id="search" type="text" class="form-control" [(ngModel)]="searchValue" (ngModelChange)="checkInputValue()"
-            placeholder="Search for a Marvel Hero. Ex: Spider-Man" [ngbTypeahead]="onSearch">
+        <div class="col search-container input-group">
+          <input
+            #search
+            id="search"
+            type="text"
+            class="form-control search-input"
+            [(ngModel)]="searchValue"
+            (ngModelChange)="checkInputValue()"
+            placeholder="Search for a Marvel Hero. Ex: Spider-Man"
+            [ngbTypeahead]="onSearch"
+          />
+          <button
+            (click)="emptyResults()"
+            class="input-group-append btn-clean-input btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+          >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
   <section class="result-section">
-    <img *ngIf="searching" class="searching-icon" src="assets/images/loading-icon.png" alt="Loading Icon">
+    <img
+      *ngIf="searching"
+      class="searching-icon"
+      src="assets/images/loading-icon.png"
+      alt="Loading Icon"
+    />
     <div class="container">
-      <ngb-alert *ngIf="noResults" (click)="closeAlert()" class="col alert-message">
+      <ngb-alert
+        *ngIf="noResults"
+        (click)="closeAlert()"
+        class="col alert-message"
+      >
         <strong>No hero was found. 😞</strong>
       </ngb-alert>
-      <ngb-alert *ngIf="serviceError" (click)="closeAlert()" class="col alert-message">
+      <ngb-alert
+        *ngIf="serviceError"
+        (click)="closeAlert()"
+        class="col alert-message"
+      >
         <strong>Something went wrong! 😱</strong> Please try again later.
       </ngb-alert>
     </div>
@@ -28,6 +57,6 @@
 </div>
 
 <footer class="footer">
-  <strong>Made by <a target="_blank" rel="noopener" class="footer-link" href="https://www.matheusbarone.com/en/" title="Matheus Barone">Matheus
-      Barone</a></strong>
+  <strong class="made-by">Made by <a target="_blank" rel="noopener" class="footer-link" href="https://www.matheusbarone.com/en/" title="Website | Matheus Barone">Matheus Barone</a></strong>
+  <a target="_blank" rel="noopener" class="math-github" title="Github | Marvel Hero Searcher" href="https://github.com/mathvbarone/marvel-hero-searcher"><i class="fab fa-github"></i></a>
 </footer>

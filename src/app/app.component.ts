@@ -1,20 +1,19 @@
-import { Component, OnInit, ElementRef, ViewChild, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { MarvelService } from './shared/services/marvel-service.service';
-import { Observable, of, Subject } from 'rxjs';
-import { debounceTime, mergeMap, tap, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, mergeMap, distinctUntilChanged
+} from 'rxjs/operators';
 import { NgbModal, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Results } from './shared/models/results';
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [NgbAlertConfig],
+  providers: [NgbAlertConfig]
 })
 
 export class AppComponent implements OnInit, OnDestroy {
-
   @ViewChild('search')
   public search: ElementRef;
   public searchValue = '';
@@ -24,9 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
   public results: Results[];
   private unsubscribe$ = new Subject();
 
-  constructor(private marvelService: MarvelService,
-    private modalService: NgbModal,
-    alertConfig: NgbAlertConfig) {
+  constructor(
+    private marvelService: MarvelService,
+    alertConfig: NgbAlertConfig
+  ) {
     this.onSearch = this.onSearch.bind(this);
     this.results = new Array<Results>();
     alertConfig.type = 'danger';
@@ -36,8 +36,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.search.nativeElement.focus();
   }
 
-
   public emptyResults() {
+    this.searchValue = '';
     this.serviceError = false;
     this.searching = false;
     this.noResults = false;
@@ -45,33 +45,35 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public onSearch(search$: Observable<string>) {
-    return search$.pipe(
-      debounceTime(800),
-      distinctUntilChanged(),
-      mergeMap(term => {
-        if (term.length < 2) {
+    return search$
+      .pipe(
+        debounceTime(800),
+        distinctUntilChanged(),
+        mergeMap(term => {
+          if (term.length < 2) {
+            this.searching = false;
+            return [];
+          } else {
+            this.noResults = false;
+            this.searching = true;
+            return this.marvelService.getCharacters(24, term);
+          }
+        })
+      )
+      .subscribe(
+        term => {
           this.searching = false;
-          return [];
-        } else {
-          this.noResults = false;
-          this.searching = true;
-          return this.marvelService.getCharacters(24, term);
-        }
-      })
-    )
-      .subscribe(term => {
-        this.searching = false;
-        this.results = term;
-        if (this.results.length === 0) {
-          this.noResults = true;
-        }
-      },
+          this.results = term;
+          if (this.results.length === 0) {
+            this.noResults = true;
+          }
+        },
         error => {
           this.searching = false;
           this.serviceError = true;
-        });
+        }
+      );
   }
-
 
   public checkInputValue() {
     if (!this.searchValue || this.searchValue.length < 2) {
@@ -88,7 +90,4 @@ export class AppComponent implements OnInit, OnDestroy {
     this.serviceError = false;
     this.noResults = false;
   }
-
-
-
 }

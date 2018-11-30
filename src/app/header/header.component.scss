@@ -6,4 +6,8 @@
     display: block;
     margin-top: 20px;
     font-weight: 400;
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
   }
+

@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Play:400,700');
-@import '~bootstrap/scss/bootstrap.scss';
-
+@import url("https://fonts.googleapis.com/css?family=Play:400,700");
+@import "~bootstrap/scss/bootstrap.scss";
 
 * {
   margin: 0;
@@ -11,11 +10,11 @@
 }
 
 body {
-  font-family: 'Play', sans-serif;
+  font-family: "Play", sans-serif;
   background: #22262a;
 }
 
-.loading-wrapper{
+.loading-wrapper {
   display: none;
 }
 
@@ -26,4 +25,10 @@ img {
 
 .is-hidden {
   display: none;
+}
+
+.modal-content {
+  @media (max-width: 768px) {
+    margin: 0px 20px 0 20px;
+  }
 }

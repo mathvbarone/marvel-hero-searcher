@@ -1,55 +1,69 @@
-
-
-@import '../variables.scss';
-
+@import "../variables.scss";
 
 .home-content {
   padding-top: 40px;
   min-height: calc(100vh - 63px);
 }
 
-.search-section{
+.search-section {
   padding: 30px 0 44px 0;
 }
 
-.form-control {
-    font-size: 23px;
-    height: 50px;
+.search-input {
+  font-size: 23px;
+  height: 50px;
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
 }
 
+.btn-clean-input {
+  transition: ease-in-out 0.2s all;
+  background: $red-color;
+  color: #fff;
+  padding: 0 20px;
+  &:hover {
+    background: darken($red-color, 15%);
+  }
+}
 
 @keyframes rotate-vert-center {
   0% {
     -webkit-transform: rotateY(0);
-            transform: rotateY(0);
+    transform: rotateY(0);
   }
   100% {
     -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
+    transform: rotateY(360deg);
   }
 }
 
-
-.searching-icon{
-  width:100px;
+.searching-icon {
+  width: 100px;
   height: 100px;
   display: block;
   margin: 40px auto;
-  animation: rotate-vert-center 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+  animation: rotate-vert-center 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    infinite both;
 }
 
 .alert-message {
   cursor: pointer;
 }
 
-
 .footer {
   padding: 10px 0;
   color: #fff;
   text-align: center;
-  display: block;
+  display: flex;
   width: 100%;
-  .footer-link {
+  align-content: center;
+  justify-content: center;
+}
+
+.made-by {
+  line-height: 40px;
+    .footer-link {
     transition: ease-in-out 0.2s all;
     text-decoration: none;
     color: #fff;
@@ -59,4 +73,12 @@
   }
 }
 
-
+.math-github {
+  color: #fff;
+  padding-left: 10px;
+  font-size: 25px;
+  transition: ease-in-out 0.2s all;
+  &:hover {
+      color: $red-color;
+    }
+}

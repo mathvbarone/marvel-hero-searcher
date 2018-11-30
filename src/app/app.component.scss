@@ -22,6 +22,10 @@
   background: $red-color;
   color: #fff;
   padding: 0 20px;
+  .fas {
+    display: flex;
+    align-self: center;
+  }
   &:hover {
     background: darken($red-color, 15%);
   }
@@ -44,8 +48,8 @@
   display: block;
   margin: 40px auto;
   animation: rotate-vert-center 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955)
-    infinite both;
-}
+  infinite both;
+  }
 
 .alert-message {
   cursor: pointer;

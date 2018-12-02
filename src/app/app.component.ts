@@ -52,9 +52,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public randomHero() {
+    const randomHero = this.randomArrayItem(this.randomHeroesList);
     this.results = new Array<Results>();
     this.searching = true;
-    const randomHero = this.randomArrayItem(this.randomHeroesList);
     this.searchValue = randomHero;
     this.marvelService.getCharacters(24, randomHero)
     .subscribe(res => {

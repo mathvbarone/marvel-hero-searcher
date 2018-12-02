@@ -1,5 +1,14 @@
 @import "../variables.scss";
 
+.marvel-btn {
+  background: $red-color;
+  transition: ease-in-out 0.2s all;
+  color: #fff;
+  &:hover {
+    background: darken($red-color, 15%);
+  }
+}
+
 .home-content {
   padding-top: 40px;
   min-height: calc(100vh - 63px);
@@ -17,17 +26,39 @@
   }
 }
 
-.btn-clean-input {
-  transition: ease-in-out 0.2s all;
-  background: $red-color;
+.search-or-random {
   color: #fff;
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  display: block
+}
+
+.btn-random {
+  @extend .marvel-btn;
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  margin: 0 15px;
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
+}
+
+.hero-icon {
+  display: block;
+  max-width: 44px;
+  margin-left:5px;
+}
+
+.btn-clean-input {
+  @extend .marvel-btn;
   padding: 0 20px;
   .fas {
     display: flex;
     align-self: center;
-  }
-  &:hover {
-    background: darken($red-color, 15%);
   }
 }
 

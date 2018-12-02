@@ -12,7 +12,6 @@ import { Results } from './shared/models/results';
   styleUrls: ['./app.component.scss'],
   providers: [NgbAlertConfig]
 })
-
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('search')
   public search: ElementRef;
@@ -22,6 +21,21 @@ export class AppComponent implements OnInit, OnDestroy {
   public serviceError = false;
   public results: Results[];
   private unsubscribe$ = new Subject();
+  private randomHeroesList = [
+    'Iron Man', 'Captain America', 'Thor', 'Black Widow',
+    'Hulk', 'Hawkeye', 'Mockingbird', 'War Machine',
+    'Ant-Man', 'Vision', 'Quicksilver', 'Scarlet Witch',
+    'Hank Pym', 'Bucky Barnes', 'Falcon', 'Daredevil',
+    'Star-Lord', 'Rocket Raccoon', 'Groot', 'Doctor Strange',
+    'Deathlok', 'Sif', 'Gamora', 'Drax', 'Iron Fist',
+    'Luke Cage', 'Jessica Jones', 'Nick Fury', 'Wasp',
+    'Warriors Three', 'Odin', 'Spider-Man', 'Cyclops', 'Magneto',
+    'Cyclops', 'Wolverine', 'Rogue', 'Storm', 'Beast',
+    'Gambit', 'Jubilee', 'Jean Grey', 'Sabretooth',
+    'Professor X', 'Cable', 'Deadpool', 'Juggernaut',
+    'Nightcrawler', 'Psylocke', 'Angel', 'Archangel',
+    'Colossus', 'Iceman', 'Mystique'
+  ];
 
   constructor(
     private marvelService: MarvelService,
@@ -31,6 +45,23 @@ export class AppComponent implements OnInit, OnDestroy {
     this.results = new Array<Results>();
     alertConfig.type = 'danger';
   }
+
+
+  public randomArrayItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  public randomHero() {
+    this.results = new Array<Results>();
+    this.searching = true;
+    const randomHero = this.randomArrayItem(this.randomHeroesList);
+    this.searchValue = randomHero;
+    this.marvelService.getCharacters(24, randomHero)
+    .subscribe(res => {
+      this.searching = false;
+      this.results = res;
+    }, error => this.serviceError = true);
+   }
 
   public ngOnInit() {
     this.search.nativeElement.focus();
@@ -50,6 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
         debounceTime(800),
         distinctUntilChanged(),
         mergeMap(term => {
+          this.results = new Array<Results>();
           if (term.length < 2) {
             this.searching = false;
             return [];

@@ -14,15 +14,27 @@
             placeholder="Search for a Marvel Hero. Ex: Spider-Man"
             [ngbTypeahead]="onSearch"
           />
-          <button
-            (click)="emptyResults()"
-            class="input-group-append btn-clean-input btn btn-outline-secondary"
-            type="button"
-            id="button-addon2"
-          >
+          <button (click)="emptyResults()"
+          class="input-group-append btn-clean-input btn btn-outline-secondary"
+          type="button">
             <i class="fas fa-times"></i>
           </button>
         </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <strong class="search-or-random">Or</strong>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <button (click)="randomHero()"
+          class="col-md-4 btn-random btn"
+          type="button">
+            Random Hero
+            <i class="hero-icon">
+              <img src="assets/images/hero-icon.svg" alt="Hero Icon">
+            </i>
+          </button>
       </div>
     </div>
   </section>

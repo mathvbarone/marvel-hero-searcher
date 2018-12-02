@@ -11,7 +11,7 @@
             class="form-control search-input"
             [(ngModel)]="searchValue"
             (ngModelChange)="checkInputValue()"
-            placeholder="Search for a Marvel Hero. Ex: Spider-Man"
+            placeholder="Search for a Hero. Ex: Spider-Man"
             [ngbTypeahead]="onSearch"
           />
           <button (click)="emptyResults()"

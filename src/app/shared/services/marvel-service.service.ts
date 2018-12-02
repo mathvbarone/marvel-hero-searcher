@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Md5 } from 'ts-md5/dist/md5';
 
-import { Observable } from 'rxjs';
 import { Marvel } from '../models/marvel';
 import { Results } from '../models/results';
 
@@ -33,7 +32,7 @@ export class MarvelService {
   }
 
 
-  getCharacters(limit = 10, nameStarts: string) {
+  getCharacters(nameStarts: string, limit = 24) {
     const timeStamp = this.getTimeStamp();
     const hash = this.getHash(timeStamp);
 

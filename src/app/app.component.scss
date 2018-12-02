@@ -47,6 +47,12 @@
   }
 }
 
+.search-btn {
+  @extend .marvel-btn;
+  padding: 0 30px;
+  font-size: 17px;
+}
+
 .hero-icon {
   display: block;
   max-width: 44px;
@@ -54,11 +60,17 @@
 }
 
 .btn-clean-input {
-  @extend .marvel-btn;
+  transition: ease-in-out 0.2s all;
+  color: #fff;
+  background: #bfbfbf;
   padding: 0 20px;
+  border-radius:0 0.25rem 0.25rem 0;
   .fas {
     display: flex;
     align-self: center;
+  }
+  &:hover {
+    background: #9e9d9d;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Results } from '../shared/models/results';
 import { Subject } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.scss'],
 })
-export class HeroesListComponent implements OnInit {
+export class HeroesListComponent implements OnInit, OnDestroy {
 
   @Input() results: Results;
   private unsubscribe$ = new Subject();

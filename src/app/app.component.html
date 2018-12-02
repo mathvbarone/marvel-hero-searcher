@@ -19,6 +19,7 @@
           type="button">
             <i class="fas fa-times"></i>
           </button>
+          <button (click)="searchHero()" type="button" class="ml-2 search-btn btn"><i class="fas fa-search"></i></button>
         </div>
       </div>
       <div class="row">
@@ -47,6 +48,12 @@
       alt="Loading Icon"
     />
     <div class="container">
+      <ngb-alert
+        *ngIf="dchHeroEasterEgg"
+        (click)="closeAlert()"
+        class="col alert-message">
+        <strong>That's a Marvel Searcher. 😞</strong>
+      </ngb-alert>
       <ngb-alert
         *ngIf="noResults"
         (click)="closeAlert()"

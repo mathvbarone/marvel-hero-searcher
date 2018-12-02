@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { MarvelService } from './shared/services/marvel-service.service';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, mergeMap, distinctUntilChanged
+import { debounceTime, mergeMap, distinctUntilChanged, tap
 } from 'rxjs/operators';
-import { NgbModal, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Results } from './shared/models/results';
 
 @Component({
@@ -19,23 +19,27 @@ export class AppComponent implements OnInit, OnDestroy {
   public searching = false;
   public noResults = false;
   public serviceError = false;
+  public dchHeroEasterEgg = false;
   public results: Results[];
   private unsubscribe$ = new Subject();
   private randomHeroesList = [
     'Iron Man', 'Captain America', 'Thor', 'Black Widow',
     'Hulk', 'Hawkeye', 'Mockingbird', 'War Machine',
     'Ant-Man', 'Vision', 'Quicksilver', 'Scarlet Witch',
-    'Hank Pym', 'Bucky Barnes', 'Falcon', 'Daredevil',
+    'Hank Pym', 'Bucky', 'Falcon', 'Daredevil',
     'Star-Lord', 'Rocket Raccoon', 'Groot', 'Doctor Strange',
     'Deathlok', 'Sif', 'Gamora', 'Drax', 'Iron Fist',
     'Luke Cage', 'Jessica Jones', 'Nick Fury', 'Wasp',
-    'Warriors Three', 'Odin', 'Spider-Man', 'Cyclops', 'Magneto',
+    'Odin', 'Spider-Man', 'Cyclops', 'Magneto',
     'Cyclops', 'Wolverine', 'Rogue', 'Storm', 'Beast',
     'Gambit', 'Jubilee', 'Jean Grey', 'Sabretooth',
     'Professor X', 'Cable', 'Deadpool', 'Juggernaut',
     'Nightcrawler', 'Psylocke', 'Angel', 'Archangel',
     'Colossus', 'Iceman', 'Mystique'
   ];
+private dcHeroes = [
+  'Batman', 'Flash'
+];
 
   constructor(
     private marvelService: MarvelService,
@@ -52,15 +56,19 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public randomHero() {
+    this.noResults = false;
     const randomHero = this.randomArrayItem(this.randomHeroesList);
     this.results = new Array<Results>();
     this.searching = true;
     this.searchValue = randomHero;
-    this.marvelService.getCharacters(24, randomHero)
+    this.marvelService.getCharacters(randomHero)
     .subscribe(res => {
       this.searching = false;
-      this.results = res;
-    }, error => this.serviceError = true);
+      this.returnResults(res);
+    }, error => {
+      this.searching = false;
+      this.serviceError = true;
+    });
    }
 
   public ngOnInit() {
@@ -72,14 +80,48 @@ export class AppComponent implements OnInit, OnDestroy {
     this.serviceError = false;
     this.searching = false;
     this.noResults = false;
+    this.serviceError = false;
     this.results = new Array<Results>();
+  }
+
+
+
+  public searchHero() {
+    this.noResults = false;
+    if (this.searchValue.length > 2) {
+      this.searching = true;
+      this.marvelService.getCharacters(this.searchValue)
+      .subscribe(res => {
+        this.searching = false;
+        this.returnResults(res);
+      },
+      error => {
+        this.searching = false;
+        this.serviceError = true;
+      });
+    }
+  }
+
+  private returnResults(res) {
+    // this.dcHeroes.forEach( hero => {
+    //   if (hero.toLowerCase === this.searchValue.toLowerCase) {
+    //     this.searching = false;
+    //     this.dchHeroEasterEgg = true;
+    //     return;
+    //   }
+    // });
+    this.results = res;
+    if (this.results.length === 0) {
+      this.noResults = true;
+    }
   }
 
   public onSearch(search$: Observable<string>) {
     return search$
       .pipe(
-        debounceTime(800),
+        debounceTime(1500),
         distinctUntilChanged(),
+        tap(() => (this.searching = true)),
         mergeMap(term => {
           this.results = new Array<Results>();
           if (term.length < 2) {
@@ -87,24 +129,19 @@ export class AppComponent implements OnInit, OnDestroy {
             return [];
           } else {
             this.noResults = false;
-            this.searching = true;
-            return this.marvelService.getCharacters(24, term);
+            return this.marvelService.getCharacters(term);
           }
-        })
-      )
-      .subscribe(
-        term => {
-          this.searching = false;
-          this.results = term;
-          if (this.results.length === 0) {
-            this.noResults = true;
+        }),
+        tap(() => (this.searching = false))
+      ).subscribe(
+          term => {
+            this.returnResults(term);
+          },
+          error => {
+            this.searching = false;
+            this.serviceError = true;
           }
-        },
-        error => {
-          this.searching = false;
-          this.serviceError = true;
-        }
-      );
+        );
   }
 
   public checkInputValue() {
